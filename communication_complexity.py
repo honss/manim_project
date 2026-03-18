@@ -1227,3 +1227,152 @@ class MappingScene_6(Scene):
 
         self.play(FadeIn(conclusion))
         self.wait(2)
+
+# -----------------------------------------------------------------------------
+# Scene: S_R Arithmetic
+# -----------------------------------------------------------------------------
+class S_RArithmeticScene_7(Scene):
+    """Explain S_R Arithmetic"""
+
+    def construct(self):
+        title = MathTex(r"|S_R| \text{ in terms of } N", font_size=40)
+        title.to_edge(UP, buff=0.4)
+        self.play(FadeIn(title))
+        self.wait(0.5)
+
+        # Number line
+        number_line = NumberLine(
+            x_range=[1, 11, 1],
+            length=10,
+            include_numbers=False,
+            include_tip=False,
+            font_size=28,
+        ).next_to(title, DOWN, buff=0.5)
+
+        label_1 = MathTex("0").next_to(number_line.n2p(1), DOWN)
+        label_2 = MathTex("1").next_to(number_line.n2p(2), DOWN)
+        label_3 = MathTex("2").next_to(number_line.n2p(3), DOWN)
+        label_end = MathTex("N = 2k+1").next_to(number_line.n2p(11), DOWN)
+
+        dot_1 = Dot(number_line.n2p(1), radius=0.10, color=RED)
+        dot_end = Dot(number_line.n2p(11), radius=0.10, color=RED)
+
+        self.play(FadeIn(number_line), FadeIn(label_1), FadeIn(label_2), FadeIn(label_3), FadeIn(label_end), FadeIn(dot_1), FadeIn(dot_end))
+        self.wait(2)
+
+        S_R_length = MathTex(
+            r"\exists \space R \le k^2d \text{ such that } |S_R| \ge \frac {k^d} {k^2d}",
+            font_size=35,
+            color=RED,
+        ).next_to(number_line, DOWN, buff=1) 
+
+        self.play(FadeIn(S_R_length))
+        self.wait(2)
+
+        question = MathTex(
+            r"\text{How to represent } k^d \text{ in terms of } N \text{?}",
+            font_size=30,
+            color=WHITE,
+        ).next_to(S_R_length, DOWN, buff=0.5)
+
+        self.play(FadeIn(question))
+        self.wait(2)
+
+        eq = MathTex(
+            r"k^d \approx \frac 1 {2^d} * N",
+            font_size=30,
+            color=WHITE,
+        ).next_to(question, DOWN, buff=0.5)
+
+        self.play(FadeIn(eq))
+        self.wait(2)
+
+        eq_0 = MathTex(
+            r"k^d \approx \frac 1 {2^d} * N",
+            font_size=30,
+            color=WHITE,
+        ).move_to(eq)
+
+        eq_1 = MathTex(
+            r"k^d \approx \frac 1 {2^d} * N",
+            font_size=30,
+            color=WHITE,
+        ).next_to(eq, DOWN, buff=0.5)
+
+        self.play(Transform(eq_0, eq_1))
+        self.wait(2)
+
+        eq_2 = MathTex(
+            r"k^d \approx \frac 1 {2^d} * (2k+1)^d",
+            font_size=30,
+            color=WHITE,
+        ).move_to(eq_0)
+
+        self.play(Transform(eq_0, eq_2))
+        self.wait(2)
+
+        eq_3 = MathTex(
+            r"k^d \approx \frac 1 {2^d} * 2^d * k^d",
+            font_size=30,
+            color=WHITE,
+        ).move_to(eq_0)
+
+        self.play(Transform(eq_0, eq_3))
+        self.wait(2)
+
+        eq_4 = MathTex(
+            r"k^d \approx k^d",
+            font_size=30,
+            color=WHITE,
+        ).move_to(eq_0)
+
+        self.play(Transform(eq_0, eq_4))
+        self.wait(2)
+
+        self.play(FadeOut(question), FadeOut(eq_0), eq.animate.shift(1 * UP))
+        self.wait(2)
+
+        plug_in_0 = MathTex(
+            r"\exists \space R \le k^2d \text{ such that }", r"|S_R| \ge \frac {k^d} {k^2d}",
+            font_size=35,
+            color=RED,
+        ).move_to(S_R_length) 
+
+        plug_in_1 = MathTex(
+            r"|S_R| \ge \frac {k^d} {k^2d}",
+            font_size=35,
+            color=RED,
+        ).next_to(eq, DOWN, buff=0.5) 
+
+        self.play(Transform(plug_in_0[1], plug_in_1))
+        self.wait(2)
+
+        plug_in_2 = MathTex(
+            r"|S_R| \ge \frac 1 {2^d}*N*\frac {1} {k^2d}",
+            font_size=35,
+            color=RED,
+        ).move_to(plug_in_0[1]) 
+
+        self.play(Transform(plug_in_0[1], plug_in_2))
+        self.wait(2)
+
+        plug_in_3 = MathTex(
+            r"|S_R| \ge \frac {N} {2^dk^2d}",
+            font_size=35,
+            color=RED,
+        ).move_to(plug_in_0[1]) 
+
+        self.play(Transform(plug_in_0[1], plug_in_3))
+        self.wait(2)
+
+        solution = MathTex(
+            r"\text{Optimizing } k,d \rightarrow 2k+1 = 2^{\sqrt{\log N}}, d = \sqrt{\log N} \rightarrow", r"|S_R| \ge \frac N {2^{c*\sqrt{\log N}}}",
+            font_size=35,
+            color=YELLOW,
+        ).next_to(plug_in_0[1], DOWN, buff=0.5)
+
+        self.play(FadeIn(solution))
+        self.wait(5)
+
+        self.play(Indicate(solution[1]))
+        self.wait(2)
