@@ -1022,3 +1022,208 @@ class BehrendGeometryScene_5(Scene):
         self.wait(2)  
 
         self.play(Indicate(claim))  
+
+# -----------------------------------------------------------------------------
+# Scene: Mapping Vector to Integer
+# -----------------------------------------------------------------------------
+class MappingScene_6(Scene):
+    """Explain mapping vectors to integers"""
+
+    def construct(self):
+        title = Text("Mapping Vectors to Integers", font_size=40)
+        title.to_edge(UP, buff=0.4)
+        self.play(FadeIn(title))
+        self.wait(0.5)
+
+        goal = MathTex(
+            r"\text{Goal: Find a mapping } f: S_R \rightarrow \mathbb{Z}",
+            font_size=30,
+            color=RED,
+        ).next_to(title, DOWN, buff=0.3) 
+
+        self.play(FadeIn(goal))
+        self.wait(2)
+
+        simplify_0 = MathTex(
+            r"x \in \{0,1\}^d",
+            font_size=30,
+            color=RED,
+        )
+
+        summation_0 = MathTex(
+            r"f(x) = \sum_{i=1}^{d}x_i*2^{i-1}",
+            font_size=30,
+            color=RED,
+        ).next_to(simplify_0, RIGHT, buff=0.5)
+
+        binary_info = VGroup(simplify_0, summation_0).next_to(goal, DOWN, buff=0.3) 
+
+        self.play(FadeIn(binary_info))
+        self.wait(2)
+
+        example_0 = MathTex(
+            r"x = \{x_4, x_3, x_2, x_1\}",
+            font_size=25,
+            color=WHITE,
+        ).next_to(binary_info, DOWN, buff=0.5)
+
+        self.play(FadeIn(example_0))
+        self.wait(2)
+
+        example_1 = MathTex(
+            r"x = \{1, 1, 0, 1\}",
+            font_size=25,
+            color=WHITE,
+        )
+        example_1.move_to(example_0)
+
+        self.play(Transform(example_0, example_1))
+        self.wait(2)
+
+        binary_eq_0 = MathTex(
+            r"f(x) = \sum_{i=1}^{d}x_i*2^{i-1}",
+            font_size=30,
+            color=RED,
+        ).next_to(simplify_0, RIGHT, buff=0.5)
+
+        self.play(FadeIn(binary_eq_0))
+
+        binary_eq_1 = MathTex(
+            r"f(x) = \sum_{i=1}^{d}x_i*2^{i-1}",
+            font_size=30,
+            color=RED,
+        ).next_to(example_1, DOWN, buff=0.3)
+
+        self.play(Transform(binary_eq_0, binary_eq_1))
+        self.wait(2)
+
+        binary_eq_2 = MathTex(
+            r"f(x) = x_4*2^3 + x_3*2^2 +x_2*2^1 + x_1*2^0",
+            font_size=30,
+            color=RED,
+        )
+
+        self.play(Transform(binary_eq_0, binary_eq_2))
+        self.wait(2)
+
+        binary_eq_3 = MathTex(
+            r"f(x) = 1*8 + 1*4 + 0*2 + 1*1",
+            font_size=30,
+            color=RED,
+        ).move_to(binary_eq_1)
+
+        self.play(Transform(binary_eq_0, binary_eq_3))
+        self.wait(2)
+
+        binary_eq_4 = MathTex(
+            r"f(x) = 13",
+            font_size=30,
+            color=RED,
+        ).move_to(binary_eq_2)
+
+        self.play(Transform(binary_eq_0, binary_eq_4))
+        self.wait(2)
+
+        self.play(FadeOut(example_0), FadeOut(binary_eq_0))
+        self.wait(2)
+
+        simplify_1 = MathTex(
+            r"x \in \{0,k\}^d",
+            font_size=30,
+            color=RED,
+        ).move_to(simplify_0)
+
+        summation_1 = MathTex(
+            r"f(x) = \sum_{i=1}^{d}x_i*", r"(2k+1)", r"^{i-1}",
+            font_size=30,
+            color=RED,
+        ).move_to(summation_0)
+
+        self.play(Transform(simplify_0, simplify_1.shift(0.3 * LEFT)), Transform(summation_0, summation_1.shift(0.5 * RIGHT)))
+        self.wait(2)
+
+        self.play(Indicate(summation_1[1]))
+        self.wait(2)
+
+        red_group = VGroup(simplify_0, summation_0)
+
+        three_ap_eq_0 = MathTex(
+            r"x+y=2z",
+            font_size=30,
+            color=WHITE,
+        ).next_to(red_group, DOWN, buff=0.5)
+
+        self.play(FadeIn(three_ap_eq_0))
+        self.wait(2)
+
+        three_ap_eq_1 = MathTex(
+            r"f(x)+f(y)=2*f(z)",
+            font_size=30,
+            color=WHITE,
+        ).move_to(three_ap_eq_0)
+
+        self.play(Transform(three_ap_eq_0, three_ap_eq_1))
+        self.wait(2)
+
+        left_side_0 = MathTex(
+            r"f(x)+f(y)", r"2*f(z)",
+            font_size=30,
+            color=WHITE,
+        ).move_to(three_ap_eq_0)
+
+        left_side_1 = MathTex(
+            r"f(x)+f(y)",
+            font_size=30,
+            color=WHITE,
+        ).next_to(three_ap_eq_0, DOWN, buff=0.5)
+
+        self.play(TransformMatchingShapes(left_side_0[0], left_side_1))
+        self.wait(2)
+
+        left_side_2 = MathTex(
+            r"f(x) +f(y) = \sum_{i=1}^{d}", r"(x_i+y_i)", r"*", r"(2k+1)", r"^{i-1}",
+            font_size=30,
+            color=WHITE,
+        ).move_to(left_side_1)
+
+        self.play(Transform(left_side_1, left_side_2))
+        self.wait(2)
+
+        self.play(Indicate(left_side_2[1]))
+        self.wait(2)
+
+        self.play(Indicate(left_side_2[3]))
+        self.wait(2)  
+
+        right_side_1 = MathTex(
+            r"2*f(z)",
+            font_size=30,
+            color=WHITE,
+        ).next_to(left_side_1, DOWN, buff=0.5)
+
+        self.play(TransformMatchingShapes(left_side_0[1], right_side_1))
+        self.wait(2)
+
+        right_side_2 = MathTex(
+            r"2*f(z)= \sum_{i=1}^{d}", r"(2*z_i)", r"*", r"(2k+1)", r"^{i-1}",
+            font_size=30,
+            color=WHITE,
+        ).move_to(right_side_1)
+
+        self.play(Transform(right_side_1, right_side_2))
+        self.wait(2)
+
+        self.play(Indicate(right_side_2[1]))
+        self.wait(2)
+
+        self.play(Indicate(right_side_2[3]))
+        self.wait(2) 
+
+        conclusion = Text(
+            "No carry over!",
+            font_size=40,
+            color=YELLOW,
+        ).next_to(right_side_1, DOWN, buff=0.5)  
+
+        self.play(FadeIn(conclusion))
+        self.wait(2)
