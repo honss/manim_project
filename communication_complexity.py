@@ -1376,3 +1376,107 @@ class S_RArithmeticScene_7(Scene):
 
         self.play(Indicate(solution[1]))
         self.wait(2)
+
+# -----------------------------------------------------------------------------
+# Scene: Explain Coloring
+# -----------------------------------------------------------------------------
+class ColoringScene_8(Scene):
+    """Explain Coloring"""
+
+    def construct(self):
+        title = MathTex(r"3\text{AP-Free Coloring}", font_size=40)
+        title.to_edge(UP, buff=0.4)
+        self.play(FadeIn(title))
+        self.wait(0.5)
+
+        # Number line
+        number_line = NumberLine(
+            x_range=[1, 11, 1],
+            length=10,
+            include_numbers=False,
+            include_tip=False,
+            font_size=28,
+        ).next_to(title, DOWN, buff=1)
+
+        dot_1_white = Dot(number_line.n2p(2), radius=0.20, color=WHITE)
+        dot_2_white = Dot(number_line.n2p(4), radius=0.20, color=WHITE)
+        dot_3_white = Dot(number_line.n2p(6), radius=0.20, color=WHITE)
+        dot_4_white = Dot(number_line.n2p(9), radius=0.20, color=WHITE)
+
+        self.play(FadeIn(number_line), FadeIn(dot_1_white), FadeIn(dot_2_white), FadeIn(dot_3_white), FadeIn(dot_4_white))
+        self.wait(2)
+
+        dot_1 = Dot(number_line.n2p(2), radius=0.20, color=YELLOW)
+        dot_2 = Dot(number_line.n2p(4), radius=0.20, color=RED)
+        dot_3 = Dot(number_line.n2p(6), radius=0.20, color=YELLOW)
+        dot_4 = Dot(number_line.n2p(9), radius=0.20, color=BLUE)
+
+        self.play(FadeIn(dot_1))
+        self.play(FadeIn(dot_2))
+        self.play(FadeIn(dot_3))
+        self.play(FadeIn(dot_4))
+        self.wait(2)
+
+        goal_0 = MathTex(
+            r"\text{Goal: Find a coloring }", r"\chi: \{1, ..., N\} \rightarrow [\text{colors}]",
+            font_size=30,
+            color=WHITE,
+        ).next_to(number_line, DOWN, buff=1) 
+
+        self.play(FadeIn(goal_0))
+        self.wait(2)
+
+        goal_1 = MathTex(
+            r"\text{such that there is no }", r"\text{monochromatic 3AP}",
+            font_size=30,
+            color=WHITE,
+        ).next_to(goal_0, DOWN, buff=0.3) 
+
+        self.play(FadeIn(goal_1))
+        self.wait(2)
+        self.play(Indicate(goal_1[1]))
+
+        goal_2 = MathTex(
+            r"\nexists \text{ } a, b, c \text{ such that } a+b = 2c \text{ and } \chi(a) = \chi(b) = \chi(c)",
+            font_size=30,
+            color=YELLOW,
+        ).next_to(goal_1, DOWN, buff=0.3) 
+
+        self.play(FadeIn(goal_2), FadeOut(dot_2_white))
+        self.wait(2)
+
+        self.play(Indicate(dot_2))
+        self.wait(2)
+
+        dot_2_3AP = Dot(number_line.n2p(4), radius=0.20, color=YELLOW)        
+        self.play(FadeIn(dot_2_3AP), FadeOut(dot_1_white), FadeOut(dot_3_white))
+        self.wait(2)
+
+        self.play(Indicate(dot_1), Indicate(dot_2_3AP), Indicate(dot_3))
+        self.wait(2)
+
+        fade = VGroup(number_line, dot_1, dot_2, dot_3, dot_4, dot_2_3AP, dot_4_white, goal_0[0], goal_1, goal_2)
+        self.play(goal_0[1].animate.next_to(title, DOWN, buff=0.5), FadeOut(fade))
+        self.wait(2)
+
+        behrend = MathTex(
+            r"|S_R| \ge \frac N {2^{c*\sqrt{\log N}}}",
+            font_size=30,
+            color=YELLOW,
+        ).next_to(goal_0[1], LEFT, buff=0.7) 
+
+        self.play(FadeIn(behrend))
+        self.wait(2)
+
+        behrend_coloring = MathTex(
+            r"\chi: \{1, ..., N\} \rightarrow [2^{c*\sqrt{\log N}}]",
+            font_size=30,
+            color=WHITE,
+        ).move_to(goal_0[1])
+
+        self.play(TransformMatchingShapes(goal_0[1], behrend_coloring))     
+        self.wait(2)
+
+        self.play(FadeOut(behrend_coloring), FadeOut(behrend))
+
+  
