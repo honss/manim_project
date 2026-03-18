@@ -864,7 +864,7 @@ class BehrendGeometryScene_5(Scene):
         sphere_def = MathTex(
             r"S_d = \{(x_1,\dots,x_d): x_1^2+\dots+x_d^2=1\}",
             font_size=30,
-        ).next_to(part2, DOWN, buff=0.3).shift(LEFT * 0.4)
+        ).next_to(part2, DOWN, buff=0.3)
 
         sphere_note = Text(
             "This is the d-dimensional unit sphere.",
@@ -936,15 +936,89 @@ class BehrendGeometryScene_5(Scene):
         self.wait(2)
 
         # ------------------------------------------------------------------
-        # Final emphasis
+        # Generalize radius and compute size of S
         # ------------------------------------------------------------------
-        summary_group = VGroup(sphere_def, coord_cap, gen_text5).shift(LEFT * 0.4)
 
-        final_box = SurroundingRectangle(
-            summary_group,
-            color=YELLOW,
-            buff=0.18,
-            stroke_width=3,
+        unit_circle_text = VGroup(part1, gen_text3, gen_text4, gen_text5)
+        two_figures = VGroup(part2, sphere_def)
+        self.play(FadeOut(left_group), FadeOut(unit_circle_text), two_figures.animate.next_to(title, DOWN, buff=0.35))
+        self.wait(0.5)
+        
+        part2_new = Text("Generalize to any radius", font_size=30)
+        part2_new.move_to(part2)
+
+        sphere_def_new = MathTex(
+            r"S_d = \{(x_1,\dots,x_d): x_1^2+\dots+x_d^2=R\}",
+            font_size=30,
         )
+        sphere_def_new.move_to(sphere_def)
 
+        self.play(Transform(part2, part2_new), TransformMatchingShapes(sphere_def, sphere_def_new))
         self.wait(2)
+
+        S_R_length_question = MathTex(
+            r"\text{How big is } |S_R|?",
+            font_size=40,
+            color=WHITE,
+        ).next_to(sphere_def_new, DOWN, buff=0.5)
+
+        self.play(FadeIn(S_R_length_question))
+        self.wait(2)
+
+        claim = MathTex(
+            r"\exists \space R \le k^2d \text{ such that } |S_R| \ge \frac {k^d} {k^2d}",
+            font_size=35,
+            color=RED,
+        ).next_to(S_R_length_question, DOWN, buff=0.3)  
+
+        self.play(FadeIn(claim))
+        self.wait(2) 
+
+        averaging_argument = MathTex(
+            r"\text{Averaging Argument } \rightarrow \text{ at least one shell containing average number of points = }\frac {\text{\# of points}} {\text {\# of shells}}",
+            font_size=30,
+            color=WHITE,
+        ).next_to(claim, DOWN, buff=0.25)
+
+        self.play(FadeIn(averaging_argument))
+        self.wait(2)
+
+        big_claim = VGroup(claim, averaging_argument)
+
+        self.play(FadeOut(part2), FadeOut(sphere_def_new), FadeOut(S_R_length_question), big_claim.animate.next_to(title, DOWN, buff=0.3))
+        self.wait(2)
+
+        num_points = MathTex(
+            r"x \in [k]^d \rightarrow \text{ There are } k^d \text{ points}",
+            font_size=30,
+            color=RED,
+        ).next_to(big_claim, DOWN, buff=0.3)     
+
+        self.play(FadeIn(num_points))
+        self.wait(2)
+
+        num_shells = MathTex(
+            r"\text{Number of possible values of } R \text{ corresponds to number of shells}",
+            font_size=30,
+            color=WHITE,
+        ).next_to(num_points, DOWN, buff=0.3)     
+
+        self.play(FadeIn(num_shells))
+        self.wait(2)    
+
+        num_shells_eq = MathTex(
+            r"R = \sum_{i = 1}^{d} x_i^2 \le d*k^2",
+            font_size=30,
+            color=WHITE,
+        ).next_to(num_shells, DOWN, buff=0.3)   
+
+        num_shells_eq_explanation = MathTex(
+            r"\text{The max value of } x_i \text{ is } k \rightarrow \text{The max value of } \sum_{i = 1}^{d} x_i^2 \text{ is } d*k^2",
+            font_size=30,
+            color=RED,
+        ).next_to(num_shells_eq, DOWN, buff=0.3)    
+
+        self.play(FadeIn(num_shells_eq), FadeIn(num_shells_eq_explanation))
+        self.wait(2)  
+
+        self.play(Indicate(claim))  
