@@ -1478,5 +1478,302 @@ class ColoringScene_8(Scene):
         self.wait(2)
 
         self.play(FadeOut(behrend_coloring), FadeOut(behrend))
+        self.wait(2)
 
+# -----------------------------------------------------------------------------
+# Scene: A, B, C Arithmetic
+# -----------------------------------------------------------------------------
+class ABCArithmeticScene_9(Scene):
+    """Explain A, B, C Arithmetic"""
+
+    def construct(self):
+        title = MathTex(r"3\text{AP-Free Coloring}", font_size=40)
+        title.to_edge(UP, buff=0.4)
+        self.add(title)
+
+        # Number line
+        number_line = NumberLine(
+            x_range=[0, 10, 1],
+            length=10,
+            include_tip=False,
+            include_numbers=False,
+        ).next_to(title, DOWN, buff=1)
+
+        self.play(Create(number_line))
+        self.wait(0.4)
+
+        # Example positions
+        a_pos = 2
+        b_pos = 5
+        c_pos = 8
+
+        a_dot = Dot(number_line.n2p(a_pos), radius=0.11, color=BLUE)
+        b_dot = Dot(number_line.n2p(b_pos), radius=0.11, color=BLUE)
+        c_dot = Dot(number_line.n2p(c_pos), radius=0.11, color=BLUE)
+
+        a_lbl = MathTex("A", font_size=34, color=BLUE).next_to(a_dot, DOWN, buff=0.18)
+        b_lbl = MathTex("B", font_size=34, color=BLUE).next_to(b_dot, DOWN, buff=0.18)
+        c_lbl = MathTex("C", font_size=34, color=BLUE).next_to(c_dot, DOWN, buff=0.18)
+
+        self.play(
+            LaggedStart(
+                FadeIn(a_dot), FadeIn(a_lbl),
+                FadeIn(b_dot), FadeIn(b_lbl),
+                FadeIn(c_dot), FadeIn(c_lbl),
+                lag_ratio=0.12,
+            )
+        )
+        self.wait(0.8)
+
+        # Show equal spacing
+        left_seg = Line(number_line.n2p(a_pos), number_line.n2p(b_pos), color=YELLOW, stroke_width=6)
+        right_seg = Line(number_line.n2p(b_pos), number_line.n2p(c_pos), color=YELLOW, stroke_width=6)
+
+        d_left = Brace(left_seg, UP, buff=0.08, color=YELLOW)
+        d_right = Brace(right_seg, UP, buff=0.08, color=YELLOW)
+
+        d_left_lbl = MathTex("d", font_size=30, color=YELLOW).next_to(d_left, UP, buff=0.08)
+        d_right_lbl = MathTex("d", font_size=30, color=YELLOW).next_to(d_right, UP, buff=0.08)
+
+        self.play(Create(left_seg), Create(right_seg))
+        self.play(
+            GrowFromCenter(d_left),
+            GrowFromCenter(d_right),
+            FadeIn(d_left_lbl),
+            FadeIn(d_right_lbl),
+        )
+        self.wait(1)
+
+        d_equal_0 = MathTex(
+            r"\text{Still monochromatic } 3AP \text{-free if } d = 0",
+            font_size=30,
+            color=YELLOW
+        ).next_to(number_line, DOWN, buff=1)
+
+        self.play(FadeIn(d_equal_0))
+        self.wait(2)
+
+        checksum_eq = MathTex(
+            r"\operatorname{CHECKSUM}(x,y,z)=1 \iff x+y+z=N",
+            font_size=30
+        ).next_to(d_equal_0, DOWN, buff=0.5)
+
+        self.play(FadeIn(checksum_eq))
+        self.wait(2)
+
+        d_0 = MathTex(
+            r"\operatorname{CHECKSUM}(x,y,z)=1 \iff ", r"x+y+z=N",
+            font_size=30
+        ).move_to(checksum_eq)
+
+        d_1 = MathTex(
+            r"x+y+z=N",
+            font_size=30
+        ).next_to(checksum_eq, DOWN, buff=0.5)
+
+        self.play(TransformMatchingShapes(d_0[1], d_1))
+        self.wait(2)
+
+        d_2 = MathTex(
+            r"x+y+z-N=0",
+            font_size=30
+        ).move_to(d_1)
+
+        self.play(TransformMatchingShapes(d_1, d_2))
+        self.wait(2)
+
+        d_3 = MathTex(
+            r"d=x+y+z-N=0",
+            font_size=30
+        ).move_to(d_1)
+
+        self.play(TransformMatchingShapes(d_2, d_3))
+        self.wait(2)
+
+        self.play(d_3.animate.next_to(number_line, DOWN, buff=1), FadeOut(d_equal_0), FadeOut(checksum_eq))
+        self.wait(0.7)
+
+        a_0 = MathTex(
+            r"A",
+            font_size=34,
+            color=BLUE
+        ).next_to(d_3, DOWN, buff=0.7)
+
+        b_0 = MathTex(
+            r"B",
+            font_size=34,
+            color=BLUE
+        ).next_to(a_0, DOWN, buff=0.5)
+
+        c_0 = MathTex(
+            r"C",
+            font_size=34,
+            color=BLUE
+        ).next_to(b_0, DOWN, buff=0.5)
+
+        self.play(
+            LaggedStart(
+                FadeIn(a_0),
+                FadeIn(b_0),
+                FadeIn(c_0),
+                lag_ratio=0.12,
+            )
+        )
+        self.wait(2)
+
+        a_1 = MathTex(
+            r"A: -y-2z",
+            font_size=34,
+            color=BLUE
+        ).move_to(a_0)
+
+        self.play(TransformMatchingShapes(a_0, a_1))
+        self.wait(2)
+
+        self.play(Indicate(a_dot), Indicate(a_lbl))
+        self.wait(1)
+
+        b_1 = MathTex(
+            r"B: (-y-2z)",
+            font_size=34,
+            color=BLUE
+        ).move_to(b_0)
+
+        self.play(TransformMatchingShapes(b_0, b_1))
+        self.wait(2)
+
+        self.play(Indicate(d_left), Indicate(d_left_lbl))
+        self.wait(1)
+
+        b_2 = MathTex(
+            r"B: (-y-2z)+d",
+            font_size=34,
+            color=BLUE
+        ).move_to(b_1)
+
+        self.play(TransformMatchingShapes(b_1, b_2))
+        self.wait(2)
+
+        self.play(Indicate(d_3))
+        self.wait(1)
+
+        b_3 = MathTex(
+            r"B: (-y-2z)+x+y+z-N",
+            font_size=34,
+            color=BLUE
+        ).move_to(b_2)
+
+        self.play(TransformMatchingShapes(b_2, b_3))
+        self.wait(2)
+
+        b_4 = MathTex(
+            r"B: x-z-N",
+            font_size=34,
+            color=BLUE
+        ).move_to(b_3)
+
+        self.play(TransformMatchingShapes(b_3, b_4))
+        self.wait(2)
+
+        self.play(Indicate(a_dot), Indicate(a_lbl))
+        self.wait(1)
+
+        c_1 = MathTex(
+            r"C: (-y-2z)",
+            font_size=34,
+            color=BLUE
+        ).move_to(c_0)
+
+        self.play(TransformMatchingShapes(c_0, c_1))
+        self.wait(2)
+
+        self.play(Indicate(d_left), Indicate(d_left_lbl), Indicate(d_right), Indicate(d_right_lbl))
+        self.wait(1)
+
+        c_2 = MathTex(
+            r"C: (-y-2z)+2d",
+            font_size=34,
+            color=BLUE
+        ).move_to(c_1)
+
+        self.play(TransformMatchingShapes(c_1, c_2))
+        self.wait(2)
+
+        self.play(Indicate(d_3))
+        self.wait(1)
+
+        c_3 = MathTex(
+            r"C: (-y-2z)+2x+2y+2z-2N",
+            font_size=34,
+            color=BLUE
+        ).move_to(c_2)
+
+        self.play(TransformMatchingShapes(c_2, c_3))
+        self.wait(2)
+
+        c_4 = MathTex(
+            r"C: 2x+y-2N",
+            font_size=34,
+            color=BLUE
+        ).move_to(c_3)
+
+        self.play(TransformMatchingShapes(c_3, c_4))
+        self.wait(2)
+
+        a_5 = MathTex(
+            r"A: 3N-y-2z",
+            font_size=34,
+            color=BLUE
+        ).move_to(a_1)
+
+        b_5 = MathTex(
+            r"B: 2N+x-z",
+            font_size=34,
+            color=BLUE
+        ).move_to(b_4)
+
+        c_5 = MathTex(
+            r"C: N+2x+y",
+            font_size=34,
+            color=BLUE
+        ).move_to(c_4)
+
+        self.play(TransformMatchingShapes(a_1, a_5), TransformMatchingShapes(b_4, b_5), TransformMatchingShapes(c_4, c_5))
+        self.wait(2)
+
+        a_6 = MathTex(
+            r"\chi(A)= \chi(3N-y-2z)",
+            font_size=34,
+            color=BLUE
+        ).move_to(a_5)
+
+        b_6 = MathTex(
+            r"\chi(B)= \chi(2N+x-z)",
+            font_size=34,
+            color=BLUE
+        ).move_to(b_5)
+
+        c_6 = MathTex(
+            r"\chi(C)= \chi(N+2x+y)",
+            font_size=34,
+            color=BLUE
+        ).move_to(c_5)
+
+        self.play(TransformMatchingShapes(a_5, a_6), TransformMatchingShapes(b_5, b_6), TransformMatchingShapes(c_5, c_6))
+        self.wait(2)
+
+        conclusion = MathTex(
+            r"\text{Notice that each coloring relies on only two variables}",
+            font_size=40,
+            color=WHITE
+        ).next_to(c_6, DOWN, buff=0.5)
+
+        self.play(FadeIn(conclusion))
+        self.wait(2)
+        self.play(Indicate(a_6))
+        self.wait(1)
+        self.play(Indicate(b_6))
+        self.wait(1)
+        self.play(Indicate(c_6))
+        self.wait(2)
   
