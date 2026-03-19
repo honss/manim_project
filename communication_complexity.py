@@ -1776,4 +1776,79 @@ class ABCArithmeticScene_9(Scene):
         self.wait(1)
         self.play(Indicate(c_6))
         self.wait(2)
-  
+
+# -----------------------------------------------------------------------------
+# Scene: CSUM and 3AP
+# -----------------------------------------------------------------------------
+class CSUM3APScene_10(Scene):
+    """Explain relation between CSUM and 3AP"""
+
+    def construct(self):
+        title = MathTex(r"\text{How is } CSUM \text{ related to } 3AP \text{ ?}", font_size=40)
+        title.to_edge(UP, buff=0.4)
+        self.play(FadeIn(title))
+        self.wait(0.5)
+
+        behrend_coloring = MathTex(
+            r"\chi: \{1, ..., N\} \rightarrow [2^{c*\sqrt{\log N}}]",
+            font_size=30,
+            color=YELLOW,
+        ).next_to(title, DOWN, 0.5)
+
+        self.play(FadeIn(behrend_coloring))
+        self.wait(2)
+
+        color_cc = MathTex(
+            r"\text{Since we only send the color} \rightarrow O(\sqrt{\log N})",
+            font_size=30,
+            color=YELLOW,
+        ).next_to(behrend_coloring, DOWN, 0.5) 
+
+        self.play(FadeIn(color_cc))
+        self.wait(2)   
+
+        csum_ex_0 = MathTex(
+            r"\text{If colors are the same, } CSUM = 1",
+            font_size=30,
+            color=WHITE,
+        ).next_to(color_cc, DOWN, 0.5) 
+
+        self.play(FadeIn(csum_ex_0))
+        self.wait(2) 
+
+        csum_ex_1 = MathTex(
+            r"\rightarrow A, B, C \text{ same color and ``form a 3AP'' but coloring says this is impossible}",
+            font_size=30,
+            color=WHITE,
+        ).next_to(csum_ex_0, DOWN, 0.5) 
+
+        self.play(FadeIn(csum_ex_1))
+        self.wait(2)
+
+        csum_ex_2 = MathTex(
+            r"\rightarrow A, B, C \text{ form a trivial 3AP where } d=0 \text{, meaning } d=x+y+z-N=0",
+            font_size=30,
+            color=WHITE,
+        ).next_to(csum_ex_1, DOWN, 0.5) 
+
+        self.play(FadeIn(csum_ex_2))
+        self.wait(2)  
+        self.play(FadeOut(csum_ex_0), FadeOut(csum_ex_1), FadeOut(csum_ex_2))
+
+        csum_ex_3 = MathTex(
+            r"\text{If colors are different, } CSUM = 1",
+            font_size=30,
+            color=WHITE,
+        ).next_to(color_cc, DOWN, 0.5) 
+
+        self.play(FadeIn(csum_ex_3))
+        self.wait(2)
+
+        csum_ex_4 = MathTex(
+            r"\rightarrow \text{ Some non-trivial 3AP exists where } d \ne 0 \text{ so colors cannot be the same}",
+            font_size=30,
+            color=WHITE,
+        ).next_to(csum_ex_3, DOWN, 0.5) 
+
+        self.play(FadeIn(csum_ex_4))
+        self.wait(2)
