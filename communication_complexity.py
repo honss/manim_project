@@ -954,7 +954,7 @@ class BehrendGeometryScene_5(Scene):
         sphere_def_new.move_to(sphere_def)
 
         self.play(Transform(part2, part2_new), TransformMatchingShapes(sphere_def, sphere_def_new))
-        self.wait(2)
+        self.wait(3)
 
         S_R_length_question = MathTex(
             r"\text{How big is } |S_R|?",
@@ -963,7 +963,7 @@ class BehrendGeometryScene_5(Scene):
         ).next_to(sphere_def_new, DOWN, buff=0.5)
 
         self.play(FadeIn(S_R_length_question))
-        self.wait(2)
+        self.wait(3)
 
         claim = MathTex(
             r"\exists \space R \le k^2d \text{ such that } |S_R| \ge \frac {k^d} {k^2d}",
@@ -972,7 +972,7 @@ class BehrendGeometryScene_5(Scene):
         ).next_to(S_R_length_question, DOWN, buff=0.3)  
 
         self.play(FadeIn(claim))
-        self.wait(2) 
+        self.wait(11) 
 
         averaging_argument = MathTex(
             r"\text{Averaging Argument } \rightarrow \text{ at least one shell containing average number of points = }\frac {\text{\# of points}} {\text {\# of shells}}",
@@ -981,12 +981,11 @@ class BehrendGeometryScene_5(Scene):
         ).next_to(claim, DOWN, buff=0.25)
 
         self.play(FadeIn(averaging_argument))
-        self.wait(2)
+        self.wait(15)
 
         big_claim = VGroup(claim, averaging_argument)
 
         self.play(FadeOut(part2), FadeOut(sphere_def_new), FadeOut(S_R_length_question), big_claim.animate.next_to(title, DOWN, buff=0.3))
-        self.wait(2)
 
         num_points = MathTex(
             r"x \in [k]^d \rightarrow \text{ There are } k^d \text{ points}",
@@ -995,7 +994,7 @@ class BehrendGeometryScene_5(Scene):
         ).next_to(big_claim, DOWN, buff=0.3)     
 
         self.play(FadeIn(num_points))
-        self.wait(2)
+        self.wait(5)
 
         num_shells = MathTex(
             r"\text{Number of possible values of } R \text{ corresponds to number of shells}",
@@ -1004,7 +1003,7 @@ class BehrendGeometryScene_5(Scene):
         ).next_to(num_points, DOWN, buff=0.3)     
 
         self.play(FadeIn(num_shells))
-        self.wait(2)    
+        self.wait(4)    
 
         num_shells_eq = MathTex(
             r"R = \sum_{i = 1}^{d} x_i^2 \le d*k^2",
@@ -1019,9 +1018,10 @@ class BehrendGeometryScene_5(Scene):
         ).next_to(num_shells_eq, DOWN, buff=0.3)    
 
         self.play(FadeIn(num_shells_eq), FadeIn(num_shells_eq_explanation))
-        self.wait(2)  
+        self.wait(11.5)  
 
-        self.play(Indicate(claim))  
+        self.play(Indicate(claim)) 
+        self.wait(2) 
 
 # -----------------------------------------------------------------------------
 # Scene: Mapping Vector to Integer
@@ -1042,7 +1042,7 @@ class MappingScene_6(Scene):
         ).next_to(title, DOWN, buff=0.3) 
 
         self.play(FadeIn(goal))
-        self.wait(2)
+        self.wait(10)
 
         simplify_0 = MathTex(
             r"x \in \{0,1\}^d",
@@ -1059,7 +1059,7 @@ class MappingScene_6(Scene):
         binary_info = VGroup(simplify_0, summation_0).next_to(goal, DOWN, buff=0.3) 
 
         self.play(FadeIn(binary_info))
-        self.wait(2)
+        self.wait(14)
 
         example_0 = MathTex(
             r"x = \{x_4, x_3, x_2, x_1\}",
@@ -1068,7 +1068,7 @@ class MappingScene_6(Scene):
         ).next_to(binary_info, DOWN, buff=0.5)
 
         self.play(FadeIn(example_0))
-        self.wait(2)
+        self.wait(1)
 
         example_1 = MathTex(
             r"x = \{1, 1, 0, 1\}",
@@ -1078,7 +1078,7 @@ class MappingScene_6(Scene):
         example_1.move_to(example_0)
 
         self.play(Transform(example_0, example_1))
-        self.wait(2)
+        self.wait(1)
 
         binary_eq_0 = MathTex(
             r"f(x) = \sum_{i=1}^{d}x_i*2^{i-1}",
@@ -1095,7 +1095,7 @@ class MappingScene_6(Scene):
         ).next_to(example_1, DOWN, buff=0.3)
 
         self.play(Transform(binary_eq_0, binary_eq_1))
-        self.wait(2)
+        self.wait(1)
 
         binary_eq_2 = MathTex(
             r"f(x) = x_4*2^3 + x_3*2^2 +x_2*2^1 + x_1*2^0",
@@ -1104,7 +1104,7 @@ class MappingScene_6(Scene):
         )
 
         self.play(Transform(binary_eq_0, binary_eq_2))
-        self.wait(2)
+        self.wait(1)
 
         binary_eq_3 = MathTex(
             r"f(x) = 1*8 + 1*4 + 0*2 + 1*1",
@@ -1113,7 +1113,7 @@ class MappingScene_6(Scene):
         ).move_to(binary_eq_1)
 
         self.play(Transform(binary_eq_0, binary_eq_3))
-        self.wait(2)
+        self.wait(1)
 
         binary_eq_4 = MathTex(
             r"f(x) = 13",
@@ -1125,7 +1125,6 @@ class MappingScene_6(Scene):
         self.wait(2)
 
         self.play(FadeOut(example_0), FadeOut(binary_eq_0))
-        self.wait(2)
 
         simplify_1 = MathTex(
             r"x \in \{0,k\}^d",
@@ -1140,10 +1139,10 @@ class MappingScene_6(Scene):
         ).move_to(summation_0)
 
         self.play(Transform(simplify_0, simplify_1.shift(0.3 * LEFT)), Transform(summation_0, summation_1.shift(0.5 * RIGHT)))
-        self.wait(2)
+        self.wait(7)
 
         self.play(Indicate(summation_1[1]))
-        self.wait(2)
+        self.wait(3)
 
         red_group = VGroup(simplify_0, summation_0)
 
@@ -1163,7 +1162,7 @@ class MappingScene_6(Scene):
         ).move_to(three_ap_eq_0)
 
         self.play(Transform(three_ap_eq_0, three_ap_eq_1))
-        self.wait(2)
+        self.wait(1)
 
         left_side_0 = MathTex(
             r"f(x)+f(y)", r"2*f(z)",
@@ -1178,7 +1177,7 @@ class MappingScene_6(Scene):
         ).next_to(three_ap_eq_0, DOWN, buff=0.5)
 
         self.play(TransformMatchingShapes(left_side_0[0], left_side_1))
-        self.wait(2)
+        self.wait(1)
 
         left_side_2 = MathTex(
             r"f(x) +f(y) = \sum_{i=1}^{d}", r"(x_i+y_i)", r"*", r"(2k+1)", r"^{i-1}",
@@ -1190,7 +1189,7 @@ class MappingScene_6(Scene):
         self.wait(2)
 
         self.play(Indicate(left_side_2[1]))
-        self.wait(2)
+        self.wait(5)
 
         self.play(Indicate(left_side_2[3]))
         self.wait(2)  
@@ -1202,7 +1201,7 @@ class MappingScene_6(Scene):
         ).next_to(left_side_1, DOWN, buff=0.5)
 
         self.play(TransformMatchingShapes(left_side_0[1], right_side_1))
-        self.wait(2)
+        self.wait(1)
 
         right_side_2 = MathTex(
             r"2*f(z)= \sum_{i=1}^{d}", r"(2*z_i)", r"*", r"(2k+1)", r"^{i-1}",
@@ -1211,7 +1210,7 @@ class MappingScene_6(Scene):
         ).move_to(right_side_1)
 
         self.play(Transform(right_side_1, right_side_2))
-        self.wait(2)
+        self.wait(3)
 
         self.play(Indicate(right_side_2[1]))
         self.wait(2)
@@ -1252,13 +1251,13 @@ class S_RArithmeticScene_7(Scene):
         label_1 = MathTex("0").next_to(number_line.n2p(1), DOWN)
         label_2 = MathTex("1").next_to(number_line.n2p(2), DOWN)
         label_3 = MathTex("2").next_to(number_line.n2p(3), DOWN)
-        label_end = MathTex("N = 2k+1").next_to(number_line.n2p(11), DOWN)
+        label_end = MathTex("N = (2k+1)^d").next_to(number_line.n2p(11), DOWN)
 
         dot_1 = Dot(number_line.n2p(1), radius=0.10, color=RED)
         dot_end = Dot(number_line.n2p(11), radius=0.10, color=RED)
 
         self.play(FadeIn(number_line), FadeIn(label_1), FadeIn(label_2), FadeIn(label_3), FadeIn(label_end), FadeIn(dot_1), FadeIn(dot_end))
-        self.wait(2)
+        self.wait(3)
 
         S_R_length = MathTex(
             r"\exists \space R \le k^2d \text{ such that } |S_R| \ge \frac {k^d} {k^2d}",
@@ -1267,7 +1266,7 @@ class S_RArithmeticScene_7(Scene):
         ).next_to(number_line, DOWN, buff=1) 
 
         self.play(FadeIn(S_R_length))
-        self.wait(2)
+        self.wait(5)
 
         question = MathTex(
             r"\text{How to represent } k^d \text{ in terms of } N \text{?}",
@@ -1276,25 +1275,25 @@ class S_RArithmeticScene_7(Scene):
         ).next_to(S_R_length, DOWN, buff=0.5)
 
         self.play(FadeIn(question))
-        self.wait(2)
+        self.wait(3)
 
         eq = MathTex(
-            r"k^d \approx \frac 1 {2^d} * N",
+            r"k^d \approx \frac 1 {2^d} * N^d",
             font_size=30,
             color=WHITE,
         ).next_to(question, DOWN, buff=0.5)
 
         self.play(FadeIn(eq))
-        self.wait(2)
+        self.wait(3)
 
         eq_0 = MathTex(
-            r"k^d \approx \frac 1 {2^d} * N",
+            r"k^d \approx \frac 1 {2^d} * N^d",
             font_size=30,
             color=WHITE,
         ).move_to(eq)
 
         eq_1 = MathTex(
-            r"k^d \approx \frac 1 {2^d} * N",
+            r"k^d \approx \frac 1 {2^d} * N^d",
             font_size=30,
             color=WHITE,
         ).next_to(eq, DOWN, buff=0.5)
@@ -1309,7 +1308,7 @@ class S_RArithmeticScene_7(Scene):
         ).move_to(eq_0)
 
         self.play(Transform(eq_0, eq_2))
-        self.wait(2)
+        self.wait(1)
 
         eq_3 = MathTex(
             r"k^d \approx \frac 1 {2^d} * 2^d * k^d",
@@ -1318,7 +1317,7 @@ class S_RArithmeticScene_7(Scene):
         ).move_to(eq_0)
 
         self.play(Transform(eq_0, eq_3))
-        self.wait(2)
+        self.wait(1)
 
         eq_4 = MathTex(
             r"k^d \approx k^d",
@@ -1327,7 +1326,7 @@ class S_RArithmeticScene_7(Scene):
         ).move_to(eq_0)
 
         self.play(Transform(eq_0, eq_4))
-        self.wait(2)
+        self.wait(1)
 
         self.play(FadeOut(question), FadeOut(eq_0), eq.animate.shift(1 * UP))
         self.wait(2)
@@ -1345,7 +1344,7 @@ class S_RArithmeticScene_7(Scene):
         ).next_to(eq, DOWN, buff=0.5) 
 
         self.play(Transform(plug_in_0[1], plug_in_1))
-        self.wait(2)
+        self.wait(3)
 
         plug_in_2 = MathTex(
             r"|S_R| \ge \frac 1 {2^d}*N*\frac {1} {k^2d}",
@@ -1363,7 +1362,7 @@ class S_RArithmeticScene_7(Scene):
         ).move_to(plug_in_0[1]) 
 
         self.play(Transform(plug_in_0[1], plug_in_3))
-        self.wait(2)
+        self.wait(5)
 
         solution = MathTex(
             r"\text{Optimizing } k,d \rightarrow 2k+1 = 2^{\sqrt{\log N}}, d = \sqrt{\log N} \rightarrow", r"|S_R| \ge \frac N {2^{c*\sqrt{\log N}}}",
@@ -1372,7 +1371,7 @@ class S_RArithmeticScene_7(Scene):
         ).next_to(plug_in_0[1], DOWN, buff=0.5)
 
         self.play(FadeIn(solution))
-        self.wait(5)
+        self.wait(8)
 
         self.play(Indicate(solution[1]))
         self.wait(2)
@@ -1415,7 +1414,6 @@ class ColoringScene_8(Scene):
         self.play(FadeIn(dot_2))
         self.play(FadeIn(dot_3))
         self.play(FadeIn(dot_4))
-        self.wait(2)
 
         goal_0 = MathTex(
             r"\text{Goal: Find a coloring }", r"\chi: \{1, ..., N\} \rightarrow [\text{colors}]",
@@ -1424,7 +1422,7 @@ class ColoringScene_8(Scene):
         ).next_to(number_line, DOWN, buff=1) 
 
         self.play(FadeIn(goal_0))
-        self.wait(2)
+        self.wait(5)
 
         goal_1 = MathTex(
             r"\text{such that there is no }", r"\text{monochromatic 3AP}",
@@ -1433,8 +1431,9 @@ class ColoringScene_8(Scene):
         ).next_to(goal_0, DOWN, buff=0.3) 
 
         self.play(FadeIn(goal_1))
-        self.wait(2)
+        self.wait(3)
         self.play(Indicate(goal_1[1]))
+        self.wait(2)
 
         goal_2 = MathTex(
             r"\nexists \text{ } a, b, c \text{ such that } a+b = 2c \text{ and } \chi(a) = \chi(b) = \chi(c)",
@@ -1443,21 +1442,21 @@ class ColoringScene_8(Scene):
         ).next_to(goal_1, DOWN, buff=0.3) 
 
         self.play(FadeIn(goal_2), FadeOut(dot_2_white))
-        self.wait(2)
+        self.wait(6)
 
         self.play(Indicate(dot_2))
-        self.wait(2)
+        self.wait(1)
 
         dot_2_3AP = Dot(number_line.n2p(4), radius=0.20, color=YELLOW)        
         self.play(FadeIn(dot_2_3AP), FadeOut(dot_1_white), FadeOut(dot_3_white))
-        self.wait(2)
+        self.wait(4)
 
         self.play(Indicate(dot_1), Indicate(dot_2_3AP), Indicate(dot_3))
         self.wait(2)
 
         fade = VGroup(number_line, dot_1, dot_2, dot_3, dot_4, dot_2_3AP, dot_4_white, goal_0[0], goal_1, goal_2)
         self.play(goal_0[1].animate.next_to(title, DOWN, buff=0.5), FadeOut(fade))
-        self.wait(2)
+        self.wait(1)
 
         behrend = MathTex(
             r"|S_R| \ge \frac N {2^{c*\sqrt{\log N}}}",
@@ -1466,7 +1465,7 @@ class ColoringScene_8(Scene):
         ).next_to(goal_0[1], LEFT, buff=0.7) 
 
         self.play(FadeIn(behrend))
-        self.wait(2)
+        self.wait(3)
 
         behrend_coloring = MathTex(
             r"\chi: \{1, ..., N\} \rightarrow [2^{c*\sqrt{\log N}}]",
@@ -1475,7 +1474,7 @@ class ColoringScene_8(Scene):
         ).move_to(goal_0[1])
 
         self.play(TransformMatchingShapes(goal_0[1], behrend_coloring))     
-        self.wait(2)
+        self.wait(4)
 
         self.play(FadeOut(behrend_coloring), FadeOut(behrend))
         self.wait(2)
@@ -1551,7 +1550,7 @@ class ABCArithmeticScene_9(Scene):
         ).next_to(number_line, DOWN, buff=1)
 
         self.play(FadeIn(d_equal_0))
-        self.wait(2)
+        self.wait(3)
 
         checksum_eq = MathTex(
             r"\operatorname{CHECKSUM}(x,y,z)=1 \iff x+y+z=N",
@@ -1559,7 +1558,7 @@ class ABCArithmeticScene_9(Scene):
         ).next_to(d_equal_0, DOWN, buff=0.5)
 
         self.play(FadeIn(checksum_eq))
-        self.wait(2)
+        self.wait(5)
 
         d_0 = MathTex(
             r"\operatorname{CHECKSUM}(x,y,z)=1 \iff ", r"x+y+z=N",
@@ -1572,7 +1571,6 @@ class ABCArithmeticScene_9(Scene):
         ).next_to(checksum_eq, DOWN, buff=0.5)
 
         self.play(TransformMatchingShapes(d_0[1], d_1))
-        self.wait(2)
 
         d_2 = MathTex(
             r"x+y+z-N=0",
@@ -1628,7 +1626,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(a_0)
 
         self.play(TransformMatchingShapes(a_0, a_1))
-        self.wait(2)
+        self.wait(7)
 
         self.play(Indicate(a_dot), Indicate(a_lbl))
         self.wait(1)
@@ -1640,7 +1638,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(b_0)
 
         self.play(TransformMatchingShapes(b_0, b_1))
-        self.wait(2)
+        self.wait(1.5)
 
         self.play(Indicate(d_left), Indicate(d_left_lbl))
         self.wait(1)
@@ -1652,7 +1650,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(b_1)
 
         self.play(TransformMatchingShapes(b_1, b_2))
-        self.wait(2)
+        self.wait(1.5)
 
         self.play(Indicate(d_3))
         self.wait(1)
@@ -1664,7 +1662,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(b_2)
 
         self.play(TransformMatchingShapes(b_2, b_3))
-        self.wait(2)
+        self.wait(1.5)
 
         b_4 = MathTex(
             r"B: x-z-N",
@@ -1673,7 +1671,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(b_3)
 
         self.play(TransformMatchingShapes(b_3, b_4))
-        self.wait(2)
+        self.wait(5)
 
         self.play(Indicate(a_dot), Indicate(a_lbl))
         self.wait(1)
@@ -1685,7 +1683,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(c_0)
 
         self.play(TransformMatchingShapes(c_0, c_1))
-        self.wait(2)
+        self.wait(1.5)
 
         self.play(Indicate(d_left), Indicate(d_left_lbl), Indicate(d_right), Indicate(d_right_lbl))
         self.wait(1)
@@ -1697,7 +1695,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(c_1)
 
         self.play(TransformMatchingShapes(c_1, c_2))
-        self.wait(2)
+        self.wait(1.5)
 
         self.play(Indicate(d_3))
         self.wait(1)
@@ -1709,7 +1707,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(c_2)
 
         self.play(TransformMatchingShapes(c_2, c_3))
-        self.wait(2)
+        self.wait(1.5)
 
         c_4 = MathTex(
             r"C: 2x+y-2N",
@@ -1718,7 +1716,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(c_3)
 
         self.play(TransformMatchingShapes(c_3, c_4))
-        self.wait(2)
+        self.wait(4)
 
         a_5 = MathTex(
             r"A: 3N-y-2z",
@@ -1739,7 +1737,7 @@ class ABCArithmeticScene_9(Scene):
         ).move_to(c_4)
 
         self.play(TransformMatchingShapes(a_1, a_5), TransformMatchingShapes(b_4, b_5), TransformMatchingShapes(c_4, c_5))
-        self.wait(2)
+        self.wait(3)
 
         a_6 = MathTex(
             r"\chi(A)= \chi(3N-y-2z)",
@@ -1769,11 +1767,11 @@ class ABCArithmeticScene_9(Scene):
         ).next_to(c_6, DOWN, buff=0.5)
 
         self.play(FadeIn(conclusion))
-        self.wait(2)
+        self.wait(3)
         self.play(Indicate(a_6))
-        self.wait(1)
+        self.wait(1.5)
         self.play(Indicate(b_6))
-        self.wait(1)
+        self.wait(1.5)
         self.play(Indicate(c_6))
         self.wait(2)
 
@@ -1787,7 +1785,7 @@ class CSUM3APScene_10(Scene):
         title = MathTex(r"\text{How is } CSUM \text{ related to } 3AP \text{ ?}", font_size=40)
         title.to_edge(UP, buff=0.4)
         self.play(FadeIn(title))
-        self.wait(0.5)
+        self.wait(2.5)
 
         behrend_coloring = MathTex(
             r"\chi: \{1, ..., N\} \rightarrow [2^{c*\sqrt{\log N}}]",
@@ -1796,7 +1794,7 @@ class CSUM3APScene_10(Scene):
         ).next_to(title, DOWN, 0.5)
 
         self.play(FadeIn(behrend_coloring))
-        self.wait(2)
+        self.wait(1)
 
         color_cc = MathTex(
             r"\text{Since we only send the color} \rightarrow O(\sqrt{\log N})",
@@ -1805,7 +1803,7 @@ class CSUM3APScene_10(Scene):
         ).next_to(behrend_coloring, DOWN, 0.5) 
 
         self.play(FadeIn(color_cc))
-        self.wait(2)   
+        self.wait(6)   
 
         csum_ex_0 = MathTex(
             r"\text{If colors are the same, } CSUM = 1",
@@ -1823,7 +1821,7 @@ class CSUM3APScene_10(Scene):
         ).next_to(csum_ex_0, DOWN, 0.5) 
 
         self.play(FadeIn(csum_ex_1))
-        self.wait(2)
+        self.wait(6)
 
         csum_ex_2 = MathTex(
             r"\rightarrow A, B, C \text{ form a trivial 3AP where } d=0 \text{, meaning } d=x+y+z-N=0",
@@ -1832,11 +1830,11 @@ class CSUM3APScene_10(Scene):
         ).next_to(csum_ex_1, DOWN, 0.5) 
 
         self.play(FadeIn(csum_ex_2))
-        self.wait(2)  
+        self.wait(12)  
         self.play(FadeOut(csum_ex_0), FadeOut(csum_ex_1), FadeOut(csum_ex_2))
 
         csum_ex_3 = MathTex(
-            r"\text{If colors are different, } CSUM = 1",
+            r"\text{If colors are different, } CSUM = 0",
             font_size=30,
             color=WHITE,
         ).next_to(color_cc, DOWN, 0.5) 
@@ -1851,4 +1849,4 @@ class CSUM3APScene_10(Scene):
         ).next_to(csum_ex_3, DOWN, 0.5) 
 
         self.play(FadeIn(csum_ex_4))
-        self.wait(2)
+        self.wait(6)
